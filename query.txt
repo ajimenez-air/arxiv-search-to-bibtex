@@ -1,0 +1,45 @@
+(
+  ("Prompting" OR "Prompt design" OR "Prompt optimization" OR "Prompting techniques" 
+    OR "LLM agents" OR "AI agents" OR "Autonomous language agents" OR "Intelligent agents" OR "Agentic" OR "Multi-agent systems"
+    OR "Retrieval-Augmented Generation" OR "RAG" OR "retrieval-enhanced generation"
+  )
+  AND
+  (
+    ("Text Simplification" OR "Automatic text simplification" OR "Text rewriting" OR "Linguistic simplification" OR "ATS"
+       OR "Plain language" OR "Clear language"
+       OR "Easy-to-read" OR "Easy Read" OR "Lectura Fácil"
+       OR "Text accessibility" OR "Accessible language" OR "Cognitive accessibility"
+    )
+    OR
+    (
+      ("Readability" OR "Readability standards" OR "Text clarity" OR "Plain language" OR "Clear language"
+       OR "Easy-to-read" OR "Easy Read" OR "Lectura Fácil" OR "Text accessibility" OR "Accessible language" OR "Cognitive accessibility")
+      AND
+      ("Simplification guidelines" OR "Language Simplification Standards" OR "Plain Language Regulation")
+      AND
+      ("Public sector" OR "Public administration" OR "Government sector" OR "Governmental institutions" OR "Public documents"
+       OR "Administration documents" OR "Administrative texts" OR "Official documents" OR "Bureaucratic texts"
+       OR "Legal documents" OR "Regulatory texts" OR "Legal texts" OR "Normative documents" OR "Legislative documents")
+    )
+    OR
+    (
+      ("Readability" OR "Readability standards" OR "Text clarity" OR "Plain language" OR "Clear language"
+       OR "Easy-to-read" OR "Easy Read" OR "Lectura Fácil" OR "Text accessibility" OR "Accessible language" OR "Cognitive accessibility")
+      AND
+      ("Simplification dataset" OR "Text simplification corpus" OR "Simplified corpus" OR "Simplified datasets" OR "Simplification corpus"
+       OR "Open dataset" OR "Public dataset" OR "Available dataset" OR "Freely available corpus" OR "Simple-complex word pairs")
+    )
+  )
+  OR
+    (
+      ("Automatic" OR "Automated" OR "Machine-assisted" OR "AI-based" OR "Computational")
+      AND
+      ("Plain language" OR "Clear language" OR "Readability" OR "Text clarity" 
+       OR "Easy-to-read" OR "Easy Read" OR "Lectura Fácil"
+       OR "Text accessibility" OR "Cognitive accessibility" OR "Accessible language")
+       AND
+       ("Public sector" OR "Public administration" OR "Government sector" OR "Governmental institutions" OR "Public documents"
+       OR "Administration documents" OR "Administrative texts" OR "Official documents" OR "Bureaucratic texts"
+       OR "Legal documents" OR "Regulatory texts" OR "Legal texts" OR "Normative documents" OR "Legislative documents")
+    )
+)
