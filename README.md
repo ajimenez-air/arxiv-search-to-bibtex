@@ -43,3 +43,4 @@ Este script permite realizar búsquedas en arXiv y obtener los resultados en for
    ```
 
 3. El script escribe los resultados de la búsqueda en un archivo llamado `resultados_arxiv.bib` en formato BibTex.
+    - La búsqueda ahora mismo está limitada a 100 resultados. Se puede modificar en el campo `max_results=100` del script. Pero si hay muchas la API no devuelve todos los resultados.
