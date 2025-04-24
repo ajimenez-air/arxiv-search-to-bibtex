@@ -4,17 +4,19 @@ import re
 def format_query(raw_query: str) -> str:
     """
     Tomar una cadena como:
-    (
-      ("Term1" OR "Term2" ...)
-      AND
-      ("TermA" OR ...)
-    )
+    (("Term1" OR "Term2" ...) AND ("TermA" OR ...))
     y devolver:
-      (all:"Term1" OR all:"Term2" ...) AND (all:"TermA" OR ...)
+    (all:"Term1" OR all:"Term2"...) AND (all:"TermA" OR...)
     """
-    single = ' '.join(raw_query.strip().split())
-    formatted = re.sub(r'"([^"]+)"', r'all:"\1"', single)
-    return formatted
+    query = re.sub(r'"([^"]+)"', r'all:"\1"', raw_query)
+    
+    # Eliminar espacios innecesarios
+    query = re.sub(r'\s+', ' ', query)  # Convertir múltiples espacios en uno solo
+    query = re.sub(r'\(\s+', '(', query)  # Eliminar espacios después de paréntesis de apertura
+    query = re.sub(r'\s+\)', ')', query)  # Eliminar espacios antes de paréntesis de cierre
+    query = re.sub(r'\s+(AND|OR)\s+', r' \1 ', query)  # Mantener un espacio alrededor de operadores
+    
+    return query.strip()
 
 def result_to_bibtex(result) -> str:
     aid = result.entry_id.split('/')[-1]
@@ -55,7 +57,7 @@ client = arxiv.Client()
 search = arxiv.Search(
     query=formatted_query,
     max_results=100,
-    sort_by=arxiv.SortCriterion.SubmittedDate,
+    sort_by=arxiv.SortCriterion.Relevance,
     sort_order=arxiv.SortOrder.Descending
 )
 
