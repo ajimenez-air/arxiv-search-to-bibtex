@@ -4,9 +4,9 @@ Este script permite realizar búsquedas en arXiv y obtener los resultados en for
 ## Requisitos
 
 ### Clona el repositorio
-    ```bash
+
     git clone https://github.com/ajimenez-air/arxiv-search-to-bibtex.git
-    ```
+
 - Python 3.6+
 - Paquete `arxiv` instalar con:
     ```bash
