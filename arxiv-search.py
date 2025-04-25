@@ -23,11 +23,13 @@ def result_to_bibtex(result) -> str:
     year = result.published.year if hasattr(result.published, 'year') else result.published[:4]
     authors = ' and '.join(author.name for author in result.authors)
     title = result.title.replace('\n', ' ').strip()
+    abstract = result.summary.replace('\n', ' ').strip()
     primary_cat = result.primary_category
     return f"""@article{{{aid},
   title         = {{{title}}},
   author        = {{{authors}}},
   year          = {{{year}}},
+  abstract      = {{{abstract}}},
   eprint        = {{arxiv:{aid}}},
   archivePrefix = {{ArXiv}},
   primaryClass  = {{{primary_cat}}},
