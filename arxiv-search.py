@@ -56,7 +56,7 @@ client = arxiv.Client()
 
 search = arxiv.Search(
     query=formatted_query,
-    max_results=100,
+    max_results=200,
     sort_by=arxiv.SortCriterion.Relevance,
     sort_order=arxiv.SortOrder.Descending
 )
@@ -64,12 +64,19 @@ search = arxiv.Search(
 output_file = 'resultados_arxiv.bib'
 with open(output_file, 'w', encoding='utf-8') as bibfile:
     try:
+        count = 0
         for result in client.results(search):
-            bibfile.write(result_to_bibtex(result) + '\n\n')
+            # Obtener el año de publicación
+            year = result.published.year if hasattr(result.published, 'year') else int(result.published[:4])
+            # Solo guardar resultados posteriores a 2017
+            if year > 2017:
+                bibfile.write(result_to_bibtex(result) + '\n\n')
+                count += 1
     except arxiv.UnexpectedEmptyPageError as e:
         print("Se han recuperado todos los resultados disponibles")
     except Exception as e:
         print(f"Error inesperado: {str(e)}")
 
-print(f"Se han exportado las entradas al archivo '{output_file}'. Consulta usada:")
+print(f"Se han exportado las entradas posteriores a 2017 al archivo '{output_file}'. Consulta usada:")
 print(formatted_query)
+print(f"Número de entradas exportadas: {count}")
