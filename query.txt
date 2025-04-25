@@ -30,5 +30,13 @@
        OR "Open dataset" OR "Public dataset" OR "Available dataset" OR "Freely available corpus" OR "Simple-complex word pairs")
     )
   )
+  OR
+  (
+    ("Automatic" OR "Automated" OR "Machine-assisted" OR "AI-based" OR "Computational")
+    AND
+    ("Plain language" OR "Clear language" OR "Readability" OR "Text clarity" 
+      OR "Easy-to-read" OR "Easy Read" OR "Lectura Fácil"
+      OR "Text accessibility" OR "Cognitive accessibility" OR "Accessible language")
+  )
   AND (cat:cs.AI OR cat:cs.LG OR cat:stat.ML OR cat:cs.CL OR cat:cs.CV OR cat:cs.NE OR cat:cs.RO OR cat:cs.MA OR cat:cs.IR)
 )
