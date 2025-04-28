@@ -23,9 +23,8 @@ def extract_keywords_from_query(raw_query: str) -> Dict[str, Set[str]]:
     """
     Extrae las palabras clave de la consulta separadas en dos grupos
     """
-    # Definir los dos grupos de palabras clave
     grupo1_keywords = [
-        # Primera parte (prompting/agents/RAG)
+        # Primera parte (prompting/agents/RAG/Automatic)
         "Prompting", "Prompt design", "Prompt optimization", "Prompting techniques",
         "LLM agents", "AI agents", "Autonomous language agents", "Intelligent agents", 
         "Agentic", "Multi-agent systems", "Retrieval-Augmented Generation",
@@ -53,15 +52,13 @@ def extract_keywords_from_query(raw_query: str) -> Dict[str, Set[str]]:
         "Text accessibility", "Cognitive accessibility", "Accessible language"
     ]
     
-    # Convertir a minúsculas y eliminar duplicados
     grupo1 = {keyword.lower() for keyword in grupo1_keywords}
     grupo2 = {keyword.lower() for keyword in grupo2_keywords}
     
-    # Devolver los dos grupos como un diccionario
     return {
         "grupo1": grupo1,
         "grupo2": grupo2,
-        "todos": grupo1.union(grupo2)
+        "all": grupo1.union(grupo2)
     }
 
 def find_matching_keywords_by_group(text: str, keywords_dict: Dict[str, Set[str]]) -> Dict[str, List[str]]:
@@ -77,7 +74,7 @@ def find_matching_keywords_by_group(text: str, keywords_dict: Dict[str, Set[str]
     return {
         "grupo1": grupo1_matches,
         "grupo2": grupo2_matches,
-        "todos": grupo1_matches + grupo2_matches
+        "all": grupo1_matches + grupo2_matches
     }
 
 def result_to_bibtex(result, keywords_dict: Dict[str, Set[str]]) -> str:
@@ -87,10 +84,9 @@ def result_to_bibtex(result, keywords_dict: Dict[str, Set[str]]) -> str:
     title = result.title.replace('\n', ' ').strip()
     abstract = result.summary.replace('\n', ' ').strip()
     primary_cat = result.primary_category
-    
-    # Encuentra las palabras clave que aparecen en el abstract
+
     matching_keywords = find_matching_keywords_by_group(abstract, keywords_dict)
-    keywords_comment = f"% Keywords found: {', '.join(matching_keywords['todos'])}"
+    keywords_comment = f"% Keywords found: {', '.join(matching_keywords['all'])}"
     
     return f"""{keywords_comment}
 @article{{{aid},
@@ -127,7 +123,6 @@ if raw_query is None:
     print("No se pudo cargar la query. El programa se detendrá.")
     exit(1)
 
-# Extraer los términos de la consulta para actualizar dinámicamente los grupos
 query_terms = extract_terms_from_query(raw_query)
 
 formatted_query = format_query(raw_query)
@@ -150,15 +145,15 @@ with open(output_file, 'w', encoding='utf-8') as bibfile:
         filtered_by_keywords = 0
         
         for result in client.results(search):
-            # Obtener el año de publicación
+            #Año de publicación
             year = result.published.year if hasattr(result.published, 'year') else int(result.published[:4])
             
-            # Paso 1: Filtrar por año
+            # Filtrado por año
             if year <= 2017:
                 filtered_by_year += 1
                 continue
                 
-            # Paso 2: Verificar si el abstract contiene palabras clave de ambos grupos
+            # Se comprueba que en el abstract aparezcan palabras clave de ambos grupos
             abstract = result.summary.replace('\n', ' ').strip()
             matching_keywords = find_matching_keywords_by_group(abstract, keywords_dict)
             
